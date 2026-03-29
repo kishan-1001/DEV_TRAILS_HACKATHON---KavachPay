@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Landing from './pages/Landing';
 import Signup from './pages/Signup';
+import Signin from './pages/Signin';
+import Dashboard from './pages/Dashboard';
 
 const queryClient = new QueryClient();
 
@@ -13,7 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/signup" element={<Signup />} />
-          {/* Other routes will go here */}
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </QueryClientProvider>

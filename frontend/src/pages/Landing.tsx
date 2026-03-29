@@ -81,14 +81,15 @@ const Landing: React.FC = () => {
           <div className="flex items-center gap-2 text-xs sm:gap-3 sm:text-sm">
             <button
               type="button"
-              className="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50 sm:rounded-xl sm:px-5 sm:py-2.5"
+              onClick={() => navigate('/signin')}
+              className="rounded-lg border border-slate-300 bg-white px-3 py-2 font-semibold text-slate-700 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50 sm:rounded-xl sm:px-5 sm:py-2.5 cursor-pointer"
             >
               Login
             </button>
             <button
               type="button"
               onClick={() => navigate('/signup')}
-              className="rounded-lg bg-blue-900 px-3 py-2 font-semibold text-white shadow-md shadow-blue-900/35 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-800 hover:shadow-lg sm:rounded-xl sm:px-5 sm:py-2.5"
+              className="rounded-lg bg-blue-900 px-3 py-2 font-semibold text-white shadow-md shadow-blue-900/35 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-800 hover:shadow-lg sm:rounded-xl sm:px-5 sm:py-2.5 cursor-pointer"
             >
               Sign Up
             </button>
@@ -103,17 +104,17 @@ const Landing: React.FC = () => {
           <div className="space-y-6">
             {/* Main Heading - Classic Typography */}
             <div className="space-y-1">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] text-slate-900 sm:text-4xl">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] text-slate-900">
                 Protecting India&apos;s
               </h1>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] sm:text-4xl">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1]">
                 <span className="flex w-full items-center">
-                  <span className="inline-flex w-full items-center rounded-r-full bg-blue-100 px-4 py-1 font-serif text-3xl font-bold leading-none tracking-[0.01em] text-blue-950 sm:px-5 sm:text-4xl md:px-7 md:py-1.5 md:text-5xl lg:w-[calc(100%+2rem)] lg:mr-[-2rem] lg:px-10 lg:py-2 lg:text-6xl">
+                  <span className="inline-flex w-full items-center rounded-r-full bg-blue-100 px-4 py-1.5 font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-none tracking-[0.01em] text-blue-950 md:px-7 md:py-1.5 lg:w-[calc(100%+2rem)] lg:mr-[-2rem] lg:px-10 lg:py-2">
                     Gig Income,
                   </span>
                 </span>
               </h2>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] text-slate-900 sm:text-4xl">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-[1.1] text-slate-900">
                 Automatically.
               </h2>
             </div>
@@ -132,13 +133,13 @@ const Landing: React.FC = () => {
             <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
-                className="w-full rounded-lg bg-blue-700 px-8 py-3 text-base font-semibold text-white shadow-md transition-colors duration-200 active:scale-95 hover:bg-blue-800 hover:shadow-lg sm:w-auto"
+                className="w-full rounded-lg bg-blue-700 px-8 py-3.5 text-base font-semibold text-white shadow-md transition-colors duration-200 active:scale-95 hover:bg-blue-800 hover:shadow-lg sm:w-auto cursor-pointer"
               >
                 Get Protected
               </button>
               <button
                 type="button"
-                className="w-full rounded-lg border-2 border-slate-300 bg-white px-8 py-3 text-base font-semibold text-slate-900 transition-all duration-200 active:scale-95 hover:border-slate-400 hover:bg-slate-50 sm:w-auto"
+                className="w-full rounded-lg border-2 border-slate-300 bg-white px-8 py-3.5 text-base font-semibold text-slate-900 transition-all duration-200 active:scale-95 hover:border-slate-400 hover:bg-slate-50 sm:w-auto cursor-pointer"
               >
                 How it Works
               </button>
@@ -436,7 +437,7 @@ const Landing: React.FC = () => {
           </h2>
           <button
             type="button"
-            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-emerald-300 px-6 py-3 text-sm font-bold text-slate-900 sm:px-8"
+            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-emerald-300 px-6 py-3 text-sm font-bold text-slate-900 sm:px-8 cursor-pointer"
           >
             Join 15,000+ Workers
             <MoveRight size={14} />

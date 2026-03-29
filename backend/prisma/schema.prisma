@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// 1. Enums
+// ==========================================
+enum Role {
+  WORKER
+  ADMIN
+}
+
+enum PlanTier {
+  BASIC
+  STANDARD
+  PREMIUM
+}
+
+enum PolicyStatus {
+  ACTIVE
+  EXPIRED
+  CANCELLED
+}
+
+enum ClaimStatus {
+  PENDING
+  PAID
+  REVIEW
+  REJECTED
+  APPEALED
+}
+
+// ==========================================
+// 2. Models
+// ==========================================
+
+model User {
+  id                String    @id @default(uuid())
+  fullName          String
+  email             String    @unique
+  phoneNumber       String?
+  role              Role      @default(WORKER)
+  city              String
+  deliveryPlatform  String
+  vehicleType       String
+  weeklyEarnings    Int
+  upiId             String?
+  trustScore        Float     @default(1.0)
+  isVerified        Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Relationships
+  policies          Policy[]
+  claims            Claim[]
+  sessions          WorkSession[]
+}
+
+model OtpVerification {
+  id          String   @id @default(uuid())
+  email       String
+  otpCode     String
+  expiresAt   DateTime
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Policy {
+  id                String       @id @default(uuid())
+  userId            String
+  user              User         @relation(fields: [userId], references: [id])
+  planTier          PlanTier
+  status            PolicyStatus
+  coverageAmount    Int
+  premiumPaid       Int
+  razorpayOrderId   String?      @unique
+  razorpayPaymentId String?      @unique
+  startDate         DateTime     @default(now())
+  endDate           DateTime
+  createdAt         DateTime     @default(now())
+
+  // Relationships
+  claims Claim[]
+
+  @@index([status, userId])
+}
+
+model WorkSession {
+  id                  String    @id @default(uuid())
+  userId              String
+  user                User      @relation(fields: [userId], references: [id])
+  startTime           DateTime  @default(now())
+  endTime             DateTime?
+  activeMinutes       Int       @default(0)
+  ipAddress           String
+  ipCity              String?
+  platformActiveFlag  Boolean   @default(true)
+  sessionHash         String
+  previousSessionHash String?
+  createdAt           DateTime  @default(now())
+
+  @@index([userId, startTime(sort: Desc)])
+}
+
+model EnvironmentalEvent {
+  id         String   @id @default(uuid())
+  city       String
+  eventType  String
+  alertLevel String
+  intensity  Float
+  source     String
+  timestamp  DateTime @default(now())
+}
+
+model Claim {
+  id               String      @id @default(uuid())
+  userId           String
+  user             User        @relation(fields: [userId], references: [id])
+  policyId         String
+  policy           Policy      @relation(fields: [policyId], references: [id])
+  triggerEvent     String
+  status           ClaimStatus
+  fraudScore       Float?
+  workProofScore   Float?
+  payoutAmount     Int?
+  razorpayPayoutId String?     @unique
+  reviewerNotes    String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@index([userId, status])
+}
